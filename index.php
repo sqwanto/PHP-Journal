@@ -9,6 +9,15 @@
 				if (!preg_match('`[A-Z]`', $_POST['password'])) $error.="<br>Please ensure you have a capital letter in your password";
 			}
 		if ($error) echo "There were error(s) in your submission: ".$error;
+		
+		// Check DB and make sure they don't already exist
+		
+		else {
+			$link = mysqli_connect("mysql.cjtully.com", "cjtullycom", "?N-jGn*M", "udemy");
+			$query = "SELECT * FROM `users` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
+			$result = mysqli_query($link, $query);
+			echo $results = mysqli_num_rows($result);
+		}
 	}
 
 ?>
